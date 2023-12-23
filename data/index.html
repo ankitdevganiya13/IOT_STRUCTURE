@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrapcss.css" rel="stylesheet">
+	<link rel="stylesheet" href="index.css">
+    <title>LoRa / IoT Gateway</title>
+
+</head>
+<body>  
+	<header>
+        <nav class="navbar navbar-expand-lg navbar-dark  fixed-top " style="padding:5px; background-color:#212F3C; box-shadow: 0px -60px 150px 20px #444A4C; ">
+	  <div class="container-fluid">
+		<a class="navbar-brand" href="#" ><img src="logo.png" alt="Italian Trulli" style="height:40px; width:180px;"> </a>  
+		<button class="navbar-toggler" type="button" id="sbtn" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent" >
+		  <ul class="navbar-nav me-auto mb-0 mb-lg-0">
+			<li class="nav-item">
+			  <button type="button" class="button3 m-1"   data-bs-toggle="modal" data-bs-target="#staticBackdrop1" id="btnDeviceConf" value="Device Confg">Device Confg</button> 
+			</li>
+			<li class="nav-item">
+			  <button type="button" class="button3 m-1 mx-0"   data-bs-toggle="modal" data-bs-target="#staticBackdrop1" id="btnNetworkConf" value="Network Confg" >Network Confg</button> 
+			</li>
+            <li class="nav-item">
+			  <button type="button" class="button3 m-1"   data-bs-toggle="modal" data-bs-target="#staticBackdrop1" id="btnDeviceinfo" value="Device Info" >Device Info</button> 
+			</li>
+			<li class="nav-item">
+			  <button type="button" class="button3 m-1 mx-0"   data-bs-toggle="modal" data-bs-target="#staticBackdrop1" id="btnAdvanceSetup" value="Advance Setup">Advance Setup</button> 
+			</li>
+		  </ul>
+		  
+	     <form action="/get" class="d-flex justify-content-center topnav-right">
+         <div class="d-flex ">	 
+            <button type="button" class="button3 m-1" style="padding-left:10px;" id="logout" name="logout" value="Logout" > <img src="logout.png" alt="Italian Trulli" style="height:16px; width:16px;"> Logout</img></button>
+         </div>
+         </form> 
+	  </div>
+	</nav>
+    </header>
+	
+	
+    <main class="d-flex justify-content-center" style="margin-top: 10vh; margin-bottom: 5vh; ">
+    <div class="form-settings">
+	<div class="container" id="loginform" style="margin-bottom:170px;">
+	<h6 class="bold-text mb-2" style="text-align:center; font-weight:bold;">Login Required for Access</h6>
+		<div class="col-12 mt-4">
+		  <label for="inputAddress2" class="form-label bold-txt">Admin</label>
+		  <input type="text" class="form-control" id="username" name="username" placeholder="Enter username here">
+		</div>
+		
+		<div class="col-12">
+		  <label for="inputAddress2" class="form-label bold-txt">Password</label>
+		  <input type="password" class="form-control" id="password" name="password" placeholder="Enter password here">
+		</div>
+		<div class="col-12">
+		<button type="button" class="button5 mt-4" style="width:100%;" id="login" name="login"><img src="login.png" alt="Italian Trulli" style="height:16px; width:16px;"> Login</img></button>   
+		</div> 
+	</div>
+	
+	<div class="container" id="configurations" style="margin-bottom:50px;">
+	<section class="deviceConfig">
+	  <form action="/get" class="row g-2 " id="FORM1" >	
+		<h6 class="bold-text" style="text-align:center; font-weight:bold;">Device Configuration</h6>
+		
+		<div class="col-md-12">
+		<label class="form-label bold-txt">Communication Module</label> 
+		<select class="form-select" name='commod' id='commod' style="border:1px solid #4D9EC4; background-color:#E7EFF3; padding-top:2px; padding-bottom:2px;"> 
+		<option value="0">WiFi</option> 
+		<option value="1">GSM</option> 
+		<select>
+		
+			
+		</div>  
+		<div class="col-md-12">
+		  <label for="inputAddress" class="form-label bold-txt">Device ID</label>
+		  <input type="text" class="form-control" id="deviceID" name="deviceID" placeholder="Enter device unique ID here">
+		</div>
+		
+		<div class="col-12">
+		  <label for="inputAddress2" class="form-label bold-txt">Routers' SSID</label>
+		  <input type="text" class="form-control" id="ssid" name="ssid" placeholder="Set SSID of WiFi here">
+		</div>
+		
+		<div class="col-12">
+		  <label for="inputAddress2" class="form-label bold-txt">Password</label>
+		  <input type="password" class="form-control" id="password1" name="password1" placeholder="Set WiFi password here">
+		</div>
+		
+		<div class="col-12">
+		  <label for="inputAddress2" class="form-label bold-txt">Response Time</label>
+		  <input type="text" class="form-control" id="responseTime" name="responseTime" placeholder="Set device response time here">
+		</div>
+			
+	    <div class="col-md-12">
+	    <button type="button" class="button5 mt-3" style="width:100%;" id="savesettings" data-bs-toggle="modal" data-bs-target="#exampleModal1" name="savesettings" value="Save Settings">Save & Apply</button>   
+	    </div>   
+	   
+	    <div class="col-md-12">
+		<button type="button" class="button5 mt-2" style="width:100%;" id="rebootbtn" data-bs-toggle="modal" data-bs-target="#exampleModal3" name="rebootbtn" value="Reboot" >Reboot System</button>   
+		</div> 
+	   
+		   	  
+		  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style=" scale=0.9; ">
+		   <div class="modal-dialog" style="margin-top:200px;">
+			 <div class="modal-content" style="  border-radius: 10px; box-shadow: 0px 0px 40px 5px #FAE5D3;">  
+			   <div class="modal-body mt-1 mb-1 justify-content-center" >
+			     <div class="text-center" style="color:#212F3C; font-weight:bold; font-style:italic; text-align:center;">Saving Settings!</div>	
+			   </div> 			  
+			  </div>
+		   </div>	
+         </div>		   
+	   </form>
+		 
+		 <form action="/get" id="FORM3" name="FORM3" value="Reboot"> 
+		    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style=" scale=0.9; ">
+			   <div class="modal-dialog" style="margin-top:200px;">
+				 <div class="modal-content" style="  border-radius: 10px; box-shadow: 0px 0px 40px 5px #FAE5D3;">  
+				   <div class="modal-body mt-1 mb-1 justify-content-center" >
+					 <div class="text-center" style="color:#212F3C; font-weight:bold; font-style:italic; text-align:center;">System Rebooting!</div>	
+				   </div> 			  
+				  </div>
+			   </div>	
+			 </div>		 
+			<input type="text" id="reboot" name="reboot" value="Reboot" hidden></input>
+            <button type="submit" id="rbt" name="rbt" value="Reboot" hidden> </button>   		 
+	     </form>	
+    </section>
+	
+    <section class="networkConfig">
+            <form action="/get" class="row g-2" id="FORM2">
+			
+			<h6 class="bold-text " style="text-align:center; font-weight:bold;" >Network Configuration</h6>
+            <div class="col-md-12">
+			  <label class="form-label bold-txt">Communication Type</label> 
+			  <select class="form-select" name='comtype' id='comtype' style=" border:1px solid #4D9EC4; background-color:#E7EFF3; padding-top:2px; padding-bottom:2px;"> 
+			  <option value="0"> MQTT</option> 
+			  <option value="1"> Rest API</option> 
+			  <select>
+			</div>
+			
+			<div class="container" id="contMQTT">
+            <div class="col-12">
+              <label for="inputAddress" class="form-label bold-txt">Host</label>
+              <input type="text" class="form-control" id="host" name="host" placeholder="Enter MQTT host / server here">
+            </div>
+			
+            <div class="col-12">
+              <label for="inputAddress2" class="form-label bold-txt">*Port</label>
+              <input type="text" class="form-control" id="port" name="port" placeholder="Enter MQTT port here">
+            </div>
+			
+			<div class="col-12">
+              <label for="inputAddress2" class="form-label bold-txt">Auth Username</label>
+              <input type="text" class="form-control" id="authUsernameOne" name="authUsernameOne" placeholder="Enter authentication username here">
+            </div>
+			
+			<div class="col-12">
+              <label for="inputAddress2" class="form-label bold-txt">Auth Password</label>
+              <input type="text" class="form-control" id="authPasswordOne" name="authPasswordOne" placeholder="Enter authentication password here">
+            </div>
+			</div>
+			
+			<div class="container" id="contRestAPI">  
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label bold-txt">Server / Host</label>
+              <input type="text" class="form-control" id="server" name="server" placeholder="Enter http server destination here">
+            </div>
+			
+			<div class="col-12">
+              <label for="inputAddress2" class="form-label bold-txt">Auth Username</label>
+              <input type="text" class="form-control" id="authUsernameTwo" name="authUsernameTwo" placeholder="Enter authentication username here">
+            </div>
+			
+			<div class="col-12">
+              <label for="inputAddress2" class="form-label bold-txt">Auth Password</label>
+              <input type="text" class="form-control" id="authPasswordTwo" name="authPasswordTwo" placeholder="Enter authentication password here">
+            </div>		
+			</div>		
+			
+           <div class="col-md-12">
+			 <button type="button" class="button5 mt-3" style="width:100%;" id="savesettings1" data-bs-toggle="modal" data-bs-target="#exampleModal2" name="savesettings1" value="Save Settings">Save & Apply</button>   
+		   </div>
+		   
+		   <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style=" scale=0.9; ">
+		   <div class="modal-dialog" style="margin-top:200px;">
+			 <div class="modal-content" style="  border-radius: 10px; box-shadow: 0px 0px 40px 5px #FAE5D3;">  
+			   <div class="modal-body mt-1 mb-1 justify-content-center" >
+			     <div class="text-center" style="color:#212F3C; font-weight:bold; font-style:italic; text-align:center;">Saving Settings!</div>	
+			   </div> 			  
+			  </div>
+		   </div>	
+         </div>	   
+       </form>
+    </section>
+    
+	<section class="deviceInfo">
+		<form action="/get" class="row g-0 " >
+		
+		<h6 class="bold-text " style="text-align:center; font-weight:bold; " >Device Information</h6>
+			
+		  <div class="row mt-2" >
+			  <div class="col-sm-5 clm-first bold-txt"  >Device Name</div>
+			  <div class="col-sm-5 clm-second" id="devicename" >LoRa Gateway</div> 
+		  </div>	
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt">Hardware Version</div>
+			  <div class="col-sm-5 clm-second" id="devicehwver">V4.0</div> 
+		  </div>	
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt">Software Version</div>
+			  <div class="col-sm-5 clm-second" id="swversion">V1.0</div>
+		  </div>	
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt">Device MAC</div>
+			  <div class="col-sm-5 clm-second" id="macid">%MACID%</div>
+		  </div>
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt">Memory Size</div>
+			  <div class="col-sm-5 clm-second" id="memsize">32 Mbit</div>
+		  </div>
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt">Response Time</div>
+			  <div class="col-sm-5 clm-second" id="responsetime" >%RESPONSETIME%</div> 
+		  </div>
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt">Connected Node/s</div>
+			  <div class="col-sm-5 clm-second" id="connectednodes">%CONNECTEDNODES%</div>
+		  </div>
+		  <div class="row mt-0">
+			  <div class="col-sm-5 clm-first bold-txt" style="border-bottom: 1px solid #9cb3c9; margin-bottom: 100px;">Temperature</div>
+			  <div class="col-sm-5 clm-second" id="temperature" style="border-bottom: 1px solid #9cb3c9; margin-bottom: 100px;">%TEMPERATURE%</div>
+		  </div>
+		   
+          </form>
+    </section>
+
+    <section class="advanceSetup" style="padding-bottom: 200px;">
+	   <form action="/get" class="row g-2 " >	
+	   <h6 class="bold-text " style="text-align:center; font-weight:bold;" >Advance Setup</h6>
+		
+		
+	   <div class="col-12">
+	   <button type="submit" class="button5 mt-1" style="width:100%;" id="erase" name="erase" value="erase" >Wipeup Device</button>   
+	   </div>
+	   
+	   <div class="col-12">
+	   <button type="button" class="button5 mt-1" style="width:100%;" id="setrtc" data-bs-toggle="modal" data-bs-target="#DateTimeUpdate" name="setrtc" value="setrtc" >Set Clock Time</button>   
+	   </div>
+	    
+	   <div class="col-md-12">
+	   <button type="button" class="button5 mt-1" style="width:100%;" id="connectednodesshow" data-bs-toggle="modal" data-bs-target="#CON-NODE" name="connectednodesshow" value="View Connected Nodes" >Connected Nodes</button>   
+	   </div>
+	   
+	   <div class="col-12">
+	   <button type="submit" class="button5 mt-1" style="width:100%;" id="removeallnode" name="removeallnode" value="remove all node" >Remove All Node</button>   
+	   </div>
+
+	  </form>   
+    </section>
+    
+	<form action="/get" class="row g-3" >
+		
+    </form>
+	
+	</div>
+    </div>	
+    </div>
+ 
+    <div class="section">
+	<div class="modal fade" id="CON-NODE" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"> 
+	  <div class="modal-dialog modal-dialog-fixed " style="max-width:600px;">
+		<div class="modal-content" style="border-radius:12px" >
+		  <div class="modal-header" <!--style="border-bottom: 1px solid black;" ---> 
+			<h5 class="modal-title d-flex justify-content-center bold-txt">Registered / Connected Nodes</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body">  
+			  <div class="container" >
+			  <div style="overflow-x:auto; border-radius: 0px; margin-top: 0.1rem; margin-bottom: 0.1rem;">
+			  <table class="" id="iotDevices"> </table>
+			  </div>
+			  <form action="/get" id="FORM5">
+			  
+			  <div class="row">
+			  <div class="col-6" style="padding-left:0px; padding-right:3;">
+			   <input type="text" class="form-control mt-3" id="removeid" name="removeid" placeholder="Node Sl. No." style="text-align:center;">  </input>
+			   </div> 
+			  <div class="col-6" style="padding-left:3px; padding-right:0;">
+			   <button type="submit" class="button5 mt-3" id="rmv" style="width:100%; background: radial-gradient(at top left,#F36060, #EA2929);" style="margin-right:0px;" >Remove</button>   
+			   </div> 
+			  </div>
+			  </div>	
+			  </div>
+			  </form>  
+		  <div class="modal-footer d-flex justify-content-center">
+		  </div>		  
+		</div>
+	  </div>
+	</div>
+    </div>
+	
+	<div class="section justify-content-center">
+	<div class="modal fade" id="DateTimeUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"> 
+	  <div class="modal-dialog modal-dialog-fixed " style="max-width:600px;">
+		<div class="modal-content" style="border-radius:12px" >
+		  <div class="modal-header" <!---style="border-bottom: 1px solid black;"" ---> 
+			<h5 class="modal-title d-flex justify-content-center bold-txt">Update Date & Time</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body d-flex justify-content-center">  
+			  <div class="container">
+			    <form action="/get" class="row g-2" >
+				  <div class="col-12 mt-2">
+					<label for="inputAddress2" class="form-label bold-txt">Enter Date</label>
+					<input type="text" class="form-control" id="date" name="date" placeholder="DD-MM-YYYY">
+				    </div>
+					  <div class="col-12 justify-content-center">
+						<label for="inputAddress2" class="form-label bold-txt">Enter Time</label>
+						<input type="text" class="form-control" id="time" name="time" placeholder="HR:MIN:SEC">
+					  </div>
+				     <div class="col-12">
+					<button type="submit" class="button5 mt-3 mb-3" style="width:100%;" onclick="sumitPage">Update RTC</button>   
+				  </div>	
+                </form>				  
+			  </div>	
+			  </div>
+		  <div class="modal-footer d-flex justify-content-center">
+		  </div>		  
+		</div>
+	  </div>
+	</div>
+    </div>
+    </main>
+	
+    <footer style="opacity:0.5;"> 
+      <div class="d-flex justify-content-center fixed-bottom"style="background-color:#212F3C;" style=" height:60px; color:#ffffff;"  >	    
+      <p class="text-center mt-2" style=" height:60px; color:#ffffff;"> Copyright @2023 Resonent Technolabs Pvt. Ltd. </p>
+      </div>     
+    </footer>
+   
+    <script src="jquery.js"></script> 
+    <script src="bootstrap3.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
